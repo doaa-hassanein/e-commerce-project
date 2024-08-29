@@ -1,5 +1,5 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Products from "./Components/Products/Products";
 import Login from "./Components/Login/Login";
@@ -23,7 +23,7 @@ import WishListContextProvider from "./Context/WishListContext";
 
 function App() {
   const x = new QueryClient();
-  const myRouter = createBrowserRouter([
+  const myRouter = createHashRouter([
     {
       path: "/",
       element: <Layout />,

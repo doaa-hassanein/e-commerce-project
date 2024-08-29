@@ -15,7 +15,8 @@ function Login() {
   const [resetCode, setResetCode] = useState("");
   const [emailForReset, setEmailForReset] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [codeVerified, setCodeVerified] = useState(false); 
+
+  const [codeVerified, setCodeVerified] = useState(false);
   const navigate = useNavigate();
   const { setToken } = useContext(authcontext);
 
@@ -24,7 +25,6 @@ function Login() {
     password: "",
   };
 
-  
   async function loginUser(values) {
     try {
       setIsLoading(true);
@@ -44,7 +44,6 @@ function Login() {
     }
   }
 
- 
   async function handleForgotPassword(values) {
     try {
       setIsLoading(true);
@@ -64,22 +63,19 @@ function Login() {
     }
   }
 
-  
   async function verifyResetCode() {
     try {
       setIsLoading(true);
       console.log("Verifying code:", resetCode);
-
-      
       const response = await axios.post(
         "https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode",
-        { email: emailForReset, code: resetCode }
+        { resetCode }
       );
 
       console.log("Response data:", response.data);
       const { success, message } = response.data;
 
-      if (success) {
+      if (response.data) {
         toast.success("Code verified successfully.");
         setCodeVerified(true);
       } else {
@@ -87,6 +83,7 @@ function Login() {
       }
     } catch (error) {
       console.error(error.response ? error.response.data : error.message);
+
       toast.error(
         error.response?.data?.message || "An error occurred. Please try again."
       );
@@ -95,22 +92,26 @@ function Login() {
     }
   }
 
-  
   async function resetPassword() {
     try {
       setIsLoading(true);
-      console.log("Resetting password:", { email: emailForReset, newPassword });
 
-     
-      const response = await axios.post(
+      if (!emailForReset || !newPassword) {
+        throw new Error("Email and new password are required.");
+      }
+
+      console.log("Resetting password:", { emailForReset, newPassword });
+
+      const response = await axios.put(
         "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
         { email: emailForReset, newPassword }
       );
 
       console.log("Response data:", response.data);
+
       const { success, message } = response.data;
 
-      if (success) {
+      if (response.data) {
         toast.success("Password has been reset successfully.");
         setIsCodeVerification(false);
         setIsForgotPassword(false);
@@ -118,7 +119,10 @@ function Login() {
         toast.error(message || "Password reset failed. Please try again.");
       }
     } catch (error) {
-      console.error(error.response ? error.response.data : error.message);
+      console.error(
+        "Error resetting password:",
+        error.response ? error.response.data : error.message
+      );
       toast.error(
         error.response?.data?.message || "An error occurred. Please try again."
       );
@@ -353,35 +357,45 @@ function Login() {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] md:w-[600px]">
             <h2 className="text-xl font-bold mb-4">Reset Password</h2>
-            <div className="mb-4">
-              <input
-                type="password"
-                placeholder="Enter New Password"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-            </div>
-            <div className="text-center">
-              <button
-                type="button"
-                onClick={resetPassword}
-                className="me-4 mb-4 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-              >
-                {isLoading ? (
-                  <i className="fa-solid fa-spinner fa-spin text-white"></i>
-                ) : (
-                  "Reset Password"
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsCodeVerification(false)}
-                className="mb-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-              >
-                Cancel
-              </button>
-            </div>
+            <form onSubmit={resetPassword}>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  placeholder="Enter Email"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                  value={emailForReset}
+                  onChange={(e) => setEmailForReset(e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="Enter New Password"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="me-4 mb-4 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                >
+                  {isLoading ? (
+                    <i className="fa-solid fa-spinner fa-spin text-white"></i>
+                  ) : (
+                    "Reset Password"
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsCodeVerification(false)}
+                  className="mb-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

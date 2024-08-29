@@ -18,12 +18,16 @@ function Products() {
   const [wishlistedProducts, setWishlistedProducts] = useState(
     new Set(wishlist)
   );
+  console.log(wishlist , "wish list context");
+
   /////////////////////////////////////////////// search ////////////////////////////////////////////
 
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     setWishlistedProducts(new Set(wishlist));
+    console.log(wishlist , "wish list context");
+
   }, [wishlist]);
 
   async function getProducts() {
@@ -70,14 +74,22 @@ function Products() {
   async function addToWishList(id) {
     try {
       const response = await addProductToWishList(id);
+
       toast.success(response.message);
+      console.log(response.message);
+      console.log(wishlistedProducts , "wish list context");
+
       setWishlistedProducts((prev) => {
         const newSet = new Set(prev);
         if (newSet.has(id)) {
           newSet.delete(id);
+      console.log(wishlistedProducts , "wish list context");
+
         } else {
           newSet.add(id);
         }
+        console.log(newSet , "new set ");
+        
         return newSet;
       });
     } catch (error) {
