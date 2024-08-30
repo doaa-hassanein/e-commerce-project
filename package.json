@@ -1,6 +1,6 @@
 {
   "name": "ecommerce",
-  "homepage": "https://doaa-hassanein.github.io/E-commerce",
+  "homepage": "https://doaa-hassanein.github.io/E-commerce_2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -28,7 +28,6 @@
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "yup": "^1.4.0"
-   
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
