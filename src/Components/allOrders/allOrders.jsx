@@ -134,7 +134,7 @@ const AllOrders = () => {
                     {cartItem.product.title.split(" ").slice(0, 2).join(" ")}
                   </h2>
                   <h3 className="text-md text-gray-600 mt-1">
-                    {cartItem.product.brand.name}
+                    {cartItem.product.brand}
                   </h3>
                   <h4 className="text-lg font-bold text-teal-600 mt-2">
                     {cartItem.price} EGP
