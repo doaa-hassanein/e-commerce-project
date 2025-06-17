@@ -37,23 +37,24 @@ function Navbar() {
                     <NavLink
                       to="/"
                       className={({ isActive }) =>
-                        `px-3 py-2 text-lg font-medium transition-colors duration-300 ${
+                        `px-3 py-2 text-lg font-bold transition-colors duration-300 ${
                           isActive
-                            ? "text-green-600 font-bold"
-                            : "text-gray-700 hover:text-green-600"
+                            ? "text-green-600"
+                            : "text-gray-800 hover:text-green-600"
                         }`
                       }
                     >
-                      Home
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all duration-300 group-hover:w-full"></span>
-                      {({ isActive }) =>
-                        isActive && (
-                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600"></span>
-                        )
-                      }
+                      {({ isActive }) => (
+                        <>
+                          Home
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all duration-300 group-hover:w-full"></span>
+                          {isActive && (
+                            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600"></span>
+                          )}
+                        </>
+                      )}
                     </NavLink>
                   </li>
-
                   <li className="relative group">
                     <NavLink
                       to="/product"
