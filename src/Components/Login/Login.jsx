@@ -170,9 +170,11 @@ function Login() {
 
       <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50 px-4">
 
-        <div className="mx-auto w-[80%]  bg-opacity-50 rounded-lg flex flex-row overflow-hidden">
+        <div className="mx-auto w-[95%] bg-opacity-50 rounded-lg flex flex-col md:flex-row overflow-hidden">
 
-          <div className="w-1/2 flex flex-col justify-center items-start text-white p-12 mb-[100px] ">
+
+          <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-white p-6 md:p-12 mb-8 md:mb-[100px]">
+
             <h1 className="text-5xl font-bold mb-10">Welcome Back</h1>
             <p className="text-xl text-white mb-6 leading-relaxed text-left ">
               It's a long established fact that a reader will be distracted
@@ -191,13 +193,14 @@ function Login() {
           </div>
 
           {/* Right Side - Login Form */}
-          <div className="w-1/2 flex items-center justify-center  bg-opacity-60 p-12">
+          <div className="w-full md:w-1/2 flex items-center justify-center bg-opacity-60 p-6 md:p-12">
+
             <div className="w-full max-w-md">
               <h2 className="text-5xl font-bold mb-6 text-white text-center">
                 Sign in
               </h2>
 
-              <form onSubmit={formik.handleSubmit} className="space-y-5">
+              <form onSubmit={formik.handleSubmit} className="space-y-4 md:space-y-5">
                 {/* Email */}
                 <div>
                   <label

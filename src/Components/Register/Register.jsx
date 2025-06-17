@@ -71,9 +71,12 @@ function Register() {
         className="absolute inset-0 object-cover w-full h-[110%] -z-10"
       />
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50 px-4">
-        <div className="mx-auto w-[90%]  bg-opacity-50 rounded-lg flex flex-row overflow-hidden">
-          <div className=" bg-opacity-85 p-8 rounded-lg shadow-lg  w-[600px] mx-4 ms-20 ">
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50 px-2 md:px-4">
+
+      <div className="mx-auto w-[90%] bg-opacity-50 rounded-lg flex flex-col lg:flex-row overflow-hidden">
+
+          <div className="bg-opacity-85 p-6 md:p-8 rounded-lg shadow-lg w-full lg:w-[600px] mx-auto">
+
             <h1 className="text-5xl font-semibold text-white text-center mb-6 ">
               Registration Form
             </h1>
@@ -228,9 +231,11 @@ function Register() {
             </form>
           </div>
 
-          <div className="w-1/2 flex flex-col justify-center items-start text-white p-12 mb-[100px] ms-60 ">
-            <h1 className="text-5xl font-bold mb-10">Welcome Back</h1>
-            <p className="text-xl text-white mb-6 leading-relaxed text-left ">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-white p-6 md:p-12 mt-10 lg:mt-0">
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 lg:mb-10">Welcome Back</h1>
+           <p className="text-base md:text-lg lg:text-xl text-white mb-6 leading-relaxed text-left">
+
               It's a long established fact that a reader will be distracted
               <br />
               by the readable content of a page when looking at its layout.
