@@ -33,7 +33,7 @@ export default function CatgorySlider() {
                 {data?.data.data.map(function (item, idx) {
                     return <div key={idx}>
                         <img src={item.image} alt="" className="w-full h-[220px]" />
-                        <h2 className="text-teal-600 font-semibold text-2xl text-center">{item.name}</h2>
+                        <h2 className="text-green-600 font-semibold text-2xl text-center">{item.name}</h2>
 
                     </div>
 

@@ -20,7 +20,7 @@ const SubCategories = () => {
     
       if (isLoading) {
         return (
-          <div className="h-screen bg-emerald-700 flex flex-wrap justify-center items-center">
+          <div className="h-screen bg-green-700 flex flex-wrap justify-center items-center">
             <Bars
               height="80"
               width="80"

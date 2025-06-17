@@ -1,21 +1,21 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Bars } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { FiChevronDown, FiChevronRight, FiChevronUp } from "react-icons/fi";
+import { ImSpinner8 } from "react-icons/im";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Categories() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subcategories, setSubcategories] = useState([]);
+  const [expandedCategories, setExpandedCategories] = useState(new Set());
 
   async function getCategories() {
     try {
       const { data } = await axios.get(
         "https://ecommerce.routemisr.com/api/v1/categories"
       );
-      console.log("Categories Data:", data.data);
-      console.log("doaa");
-
       return data.data;
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -24,16 +24,11 @@ function Categories() {
   }
 
   async function getSubcategories(categoryId) {
-    if (!categoryId) {
-      console.error("Category ID is undefined or invalid.");
-
-      return [];
-    }
+    if (!categoryId) return [];
     try {
       const { data } = await axios.get(
         `https://ecommerce.routemisr.com/api/v1/categories/${categoryId}/subcategories`
       );
-      console.log("Subcategories Data:", data.data);
       return data.data;
     } catch (error) {
       console.error("Error fetching subcategories:", error);
@@ -47,99 +42,118 @@ function Categories() {
     error,
   } = useQuery("categories", getCategories);
 
-  const handleCategoryClick = async (categoryId) => {
-    if (!categoryId) {
-      console.error("Invalid category ID:", categoryId);
-      return;
+  const toggleCategory = async (categoryId) => {
+    const newExpanded = new Set(expandedCategories);
+    if (newExpanded.has(categoryId)) {
+      newExpanded.delete(categoryId);
+      setSelectedCategory(null);
+    } else {
+      newExpanded.clear();
+      newExpanded.add(categoryId);
+      setSelectedCategory(categoryId);
+      try {
+        const subs = await getSubcategories(categoryId);
+        setSubcategories(subs);
+      } catch (err) {
+        console.error("Error loading subcategories:", err);
+      }
     }
-    setSelectedCategory(categoryId);
-    try {
-      const subcategories = await getSubcategories(categoryId);
-      setSubcategories(subcategories);
-    } catch (error) {
-      console.error("Error handling category click:", error);
-    }
+    setExpandedCategories(newExpanded);
   };
 
   if (isLoading) {
     return (
-      <div className="h-screen bg-teal-700 flex flex-wrap justify-center items-center">
-        <Bars
-          height="80"
-          width="80"
-          color="#fff"
-          ariaLabel="bars-loading"
-          visible={true}
-        />
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <ImSpinner8 className="animate-spin text-4xl text-green-600" />
       </div>
     );
   }
 
   if (error) {
-    return <div>Error loading categories!</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center p-8 bg-red-50 rounded-lg">
+          <h2 className="text-xl font-medium text-red-600">
+            Failed to load categories
+          </h2>
+          <p className="text-gray-600 mt-2">Please try again later</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <>
-      <section className="py-8">
-        <div className="w-full md:w-[100%] m-auto">
-          <div className="flex flex-wrap justify-center items-center my-10 gap-10">
-            {categoriesData?.map((item, idx) => (
-              <div
-                className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 product-card"
-                key={idx}
-              >
-                <div className="flex flex-col items-center h-full bg-white shadow-md rounded-lg overflow-hidden">
-                  <button
-                    onClick={() => handleCategoryClick(item._id)} // category id
-                    className="w-full h-full flex flex-wrap"
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-80 object-cover"
-                    />
-
-                    <div className=" flex flex-col categoryTitle mx-auto">
-                    <h2 className="text-teal-600 my-6 text-center text-3xl font-semibold flex-grow">
-                      {item.name}
-                    </h2>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            ))}
+    <div className="bg-gray-50 min-h-screen py-12">
+      <div className="container mx-auto px-4">
+       <div className="flex flex-wrap items-center justify-center mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <h1 className="font-bold text-center text-5xl tracking-wider text-green-600">
+                  Browse Our Collections
+              </h1>
+            </motion.div>
           </div>
 
-          {selectedCategory && (
-            <section className="py-8">
-              <div className="w-full md:w-[100%] m-auto">
-                <h2 className="text-center text-5xl font-bold mb-4 text-teal-500">
-                  {/* اسم ال Subcategories */}
-                  Subcategories
-                </h2>
-                <div className="flex flex-wrap justify-center items-center gap-4">
-                  {subcategories.map((sub, idx) => (
-                    <div
-                      className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 "
-                      key={idx}
-                    >
-                      <div className="flex flex-col items-center bg-white border border-gray-200 py-4 rounded-lg product-card">
-                        <div className=" flex flex-col">
-                          <h3 className=" my-3 text-center text-3xl font-semibold text-gray-900">
-                            {sub.name}
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categoriesData?.map((category) => (
+            <div key={category._id} className="relative group">
+              {/* Category Card */}
+              <div
+                className="bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer"
+                onClick={() => toggleCategory(category._id)}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                    <h2 className="text-2xl font-medium text-white">
+                      {category.name}
+                    </h2>
+                  </div>
                 </div>
               </div>
-            </section>
-          )}
+
+              {/* Subcategories Slide-out Panel */}
+              <AnimatePresence>
+                {expandedCategories.has(category._id) && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid grid-cols-2 gap-3 p-6 bg-gray-50 rounded-b-xl "
+                  >
+                    {subcategories.map((sub) => (
+                      <motion.div
+                        key={sub._id}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Link
+                          to={`/products?subcategory=${sub._id}`}
+                          className="block px-4 py-4 bg-white rounded-lg shadow-xs hover:shadow-sm transition-all text-center hover:bg-green-50  border-2 border-green-600 "
+                        >
+                          <span className="text-lg font-medium text-gray-800 hover:text-green-600 ">
+                            {sub.name}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }
 

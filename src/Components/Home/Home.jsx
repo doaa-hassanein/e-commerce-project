@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import HomeSlider from "../HomeSlider/HomeSilder";
+import CatgorySlider from "../CategorySlider/CatgorySlider";
 import { Link } from "react-router-dom";
 import { cartContext } from "../../Context/CartContext";
 import toast from "react-hot-toast";
 import { wishListContext } from "../../Context/WishListContext";
 import { ImSpinner8 } from "react-icons/im";
-import { BsCartPlus, BsHeartFill, BsStarFill } from "react-icons/bs";
-import { FiHeart } from "react-icons/fi";
+import { FiSearch, FiHeart } from "react-icons/fi";
+import { BsHeartFill, BsCartPlus, BsStarFill } from "react-icons/bs";
 
-function Products() {
+function Home() {
   const { addProductToWishList, wishlist } = useContext(wishListContext);
   const { addProductToCart } = useContext(cartContext);
 
@@ -30,14 +32,18 @@ function Products() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <ImSpinner8 className="animate-spin text-4xl text-green-600" />
       </div>
     );
   }
 
   if (error) {
-    return <div>Error loading products!</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 text-red-500">
+        Error loading products!
+      </div>
+    );
   }
 
   const filteredProducts = data?.data?.data?.filter((item) =>
@@ -47,18 +53,34 @@ function Products() {
   async function addProduct(id) {
     try {
       const response = await addProductToCart(id);
-      console.log(id);
-
-      toast.success(response.message);
+      toast.success(response.message, {
+        style: {
+          borderRadius: "8px",
+          background: "#fff",
+          color: "#333",
+        },
+      });
     } catch (error) {
-      toast.error("Error adding product to cart");
+      toast.error("Error adding product to cart", {
+        style: {
+          borderRadius: "8px",
+          background: "#fff",
+          color: "#333",
+        },
+      });
     }
   }
 
   async function addToWishList(id) {
     try {
       const response = await addProductToWishList(id);
-      toast.success(response.message);
+      toast.success(response.message, {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
 
       setWishlistedProducts((prev) => {
         const newSet = new Set(prev);
@@ -66,14 +88,52 @@ function Products() {
         return newSet;
       });
     } catch (error) {
-      toast.error("Error adding product to wishlist");
+      toast.error("Error adding product to wishlist", {
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     }
   }
 
   return (
-    <section className="py-10 px-4 bg-gray-50 min-h-screen">
-      <div className="w-[80%] mx-auto">
+    <div className="bg-gray-50 min-h-screen">
+      <div className="w-[80%] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Hero Slider */}
+        <div className="mb-12 rounded-xl overflow-hidden shadow-lg">
+          <HomeSlider />
+        </div>
+
+        {/* Category Slider */}
         <div className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            Shop by Category
+          </h2>
+          <CatgorySlider />
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative mb-12 max-w-md mx-auto">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <FiSearch className="text-gray-400" />
+          </div>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            placeholder="Search for products..."
+          />
+        </div>
+
+        {/* Products Grid */}
+
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            Featured Products
+          </h2>
           {filteredProducts?.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">
@@ -149,8 +209,8 @@ function Products() {
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-export default Products;
+export default Home;

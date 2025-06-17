@@ -5,8 +5,7 @@ import toast from "react-hot-toast";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authcontext } from "./../../Context/AuthContextProvider";
-import background from "./../../assets/images/background.jpg";
-import logo from "./../../assets/images/logo.png";
+import background from "./../../assets/images/pexels-catiamatos-1072179.jpg";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -169,92 +168,124 @@ function Login() {
         className="absolute inset-0 object-cover w-full h-[110%] -z-10"
       />
 
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 bg-opacity-50">
-        <div className="mb-4">
-          <img src={logo} alt="Logo" className="w-32 h-auto" />
-        </div>
-        <div className="bg-white bg-opacity-85 p-8 rounded-lg shadow-lg w-full sm:w-[600px] max-w-md login-card">
-          <h1 className="text-4xl my-4 font-bold text-teal-600 text-center">
-            Login Form
-          </h1>
-          <div className="w-[80%] mx-auto">
-            <form onSubmit={formik.handleSubmit}>
-              <div className="relative z-0 w-full mb-6 group">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="block py-3 px-0 w-full text-base text-gray-800 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                  placeholder=" "
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                <label
-                  htmlFor="email"
-                  className="absolute text-base text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                >
-                  Email address
-                </label>
-              </div>
-              {formik.errors.email && formik.touched.email && (
-                <div
-                  className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
-                  role="alert"
-                >
-                  <span className="font-medium">Error!</span>{" "}
-                  {formik.errors.email}
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50 px-4">
+
+        <div className="mx-auto w-[80%]  bg-opacity-50 rounded-lg flex flex-row overflow-hidden">
+
+          <div className="w-1/2 flex flex-col justify-center items-start text-white p-12 mb-[100px] ">
+            <h1 className="text-5xl font-bold mb-10">Welcome Back</h1>
+            <p className="text-xl text-white mb-6 leading-relaxed text-left ">
+              It's a long established fact that a reader will be distracted
+              <br />
+              by the readable content of a page when looking at its layout.
+              <br />
+              Many desktop publishing packages and web page editors now use
+              Lorem Ipsum.
+            </p>
+            <div className="flex space-x-4 mt-6">
+              <i className="fab fa-facebook-f text-2xl"></i>
+              <i className="fab fa-twitter text-2xl"></i>
+              <i className="fab fa-instagram text-2xl"></i>
+              <i className="fab fa-youtube text-2xl"></i>
+            </div>
+          </div>
+
+          {/* Right Side - Login Form */}
+          <div className="w-1/2 flex items-center justify-center  bg-opacity-60 p-12">
+            <div className="w-full max-w-md">
+              <h2 className="text-5xl font-bold mb-6 text-white text-center">
+                Sign in
+              </h2>
+
+              <form onSubmit={formik.handleSubmit} className="space-y-5">
+                {/* Email */}
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-xl font-medium text-white"
+                  >
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.email && formik.touched.email && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {formik.errors.email}
+                    </p>
+                  )}
                 </div>
-              )}
-              <div className="relative z-0 w-full mb-6 group">
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="block py-3 px-0 w-full text-base text-gray-800 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                  placeholder=" "
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                <label
-                  htmlFor="password"
-                  className="absolute text-base text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                >
-                  Password
-                </label>
-              </div>
-              {formik.errors.password && formik.touched.password && (
-                <div
-                  className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"
-                  role="alert"
-                >
-                  <span className="font-medium">Error!</span>{" "}
-                  {formik.errors.password}
+
+                {/* Password */}
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-xl font-medium text-white"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.password && formik.touched.password && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {formik.errors.password}
+                    </p>
+                  )}
                 </div>
-              )}
-              <div className="text-center">
+
+                {/* Remember me + Forgot Password */}
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center text-lg font-medium text-gray-300">
+                    <input type="checkbox" className="mr-2" />
+                    Remember me
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setIsForgotPassword(true)}
+                    className="text-lg font-medium text-white hover:underline"
+                  >
+                    Forget password?
+                  </button>
+                </div>
+
+                {/* Submit Button */}
                 <button
                   type="submit"
-                  className="mb-4 text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-500 font-medium rounded-lg text-lg w-full px-5 py-2.5 text-center"
+                  className="w-full text-xl font-medium py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition"
                 >
                   {isLoading ? (
                     <i className="fa-solid fa-spinner fa-spin text-white"></i>
                   ) : (
-                    "Login"
+                    "Sign in now"
                   )}
                 </button>
-              </div>
-              <div className="text-center">
-                <button
-                  type="button"
-                  onClick={() => setIsForgotPassword(true)}
-                  className="text-lg text-blue-500 hover:underline"
-                >
-                  Forgot Password?
-                </button>
-              </div>
-            </form>
+              </form>
+
+              {/* Terms */}
+              <p className="text-sm text-center text-white mt-6">
+                By clicking on "Sign in now" you agree to our{" "} <br/>
+                <a href="#" className="text-white hover:underline">
+                  Terms of Service
+                </a>{" "}
+                &{" "}
+                <a href="#" className="text-white hover:underline">
+                  Privacy Policy
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -269,7 +300,7 @@ function Login() {
                   type="email"
                   name="email"
                   id="forgot-email"
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-500 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer"
                   placeholder=" "
                   value={forgotPasswordFormik.values.email}
                   onChange={forgotPasswordFormik.handleChange}
@@ -277,7 +308,7 @@ function Login() {
                 />
                 <label
                   htmlFor="forgot-email"
-                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-teal-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Email address
                 </label>
@@ -295,7 +326,7 @@ function Login() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="me-4 mb-4 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                  className="me-4 mb-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                 >
                   {isLoading ? (
                     <i className="fa-solid fa-spinner fa-spin text-white"></i>
@@ -306,7 +337,7 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setIsForgotPassword(false)}
-                  className="mb-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                  className="mb-4 text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                 >
                   Cancel
                 </button>
@@ -324,7 +355,7 @@ function Login() {
               <input
                 type="text"
                 placeholder="Enter Reset Code"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-500 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer"
                 value={resetCode}
                 onChange={(e) => setResetCode(e.target.value)}
               />
@@ -333,7 +364,7 @@ function Login() {
               <button
                 type="button"
                 onClick={verifyResetCode}
-                className="me-4 mb-4 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                className="me-4 mb-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
               >
                 {isLoading ? (
                   <i className="fa-solid fa-spinner fa-spin text-white"></i>
@@ -344,7 +375,7 @@ function Login() {
               <button
                 type="button"
                 onClick={() => setIsCodeVerification(false)}
-                className="mb-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                className="mb-4 text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
               >
                 Cancel
               </button>
@@ -362,7 +393,7 @@ function Login() {
                 <input
                   type="email"
                   placeholder="Enter Email"
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-500 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer"
                   value={emailForReset}
                   onChange={(e) => setEmailForReset(e.target.value)}
                 />
@@ -371,7 +402,7 @@ function Login() {
                 <input
                   type="password"
                   placeholder="Enter New Password"
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-teal-500 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-500 appearance-none focus:outline-none focus:ring-0 focus:border-green-600 peer"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
@@ -379,7 +410,7 @@ function Login() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="me-4 mb-4 text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                  className="me-4 mb-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                 >
                   {isLoading ? (
                     <i className="fa-solid fa-spinner fa-spin text-white"></i>
@@ -390,7 +421,7 @@ function Login() {
                 <button
                   type="button"
                   onClick={() => setIsCodeVerification(false)}
-                  className="mb-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                  className="mb-4 text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                 >
                   Cancel
                 </button>

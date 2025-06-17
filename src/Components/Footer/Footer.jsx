@@ -7,7 +7,7 @@ function Footer() {
       <div className="mx-auto max-w-screen-xl px-4">
         {/* App Promotion Section */}
         <div className="text-center mb-8">
-          <span className="text-3xl font-semibold text-teal-600">
+          <span className="text-3xl font-semibold text-green-600">
             Get the FrshCart App
           </span>
           <p className="text-lg text-gray-600 mt-2">
@@ -19,10 +19,10 @@ function Footer() {
         <div className="flex flex-col items-center md:flex-row md:justify-center md:space-x-4">
           <input
             type="text"
-            className="w-full md:w-2/3 lg:w-1/3 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full md:w-2/3 lg:w-1/3 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter your email..."
           />
-          <button className="mt-4 md:mt-0 bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 focus:ring-4 focus:ring-teal-300 text-lg">
+          <button className="mt-4 md:mt-0 bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 focus:ring-4 focus:ring-green-300 text-lg">
             Share App Link
           </button>
         </div>

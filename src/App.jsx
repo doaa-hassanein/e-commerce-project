@@ -3,6 +3,7 @@ import "./App.css";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Products from "./Components/Products/Products";
+import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Brands from "./Components/Brands/Brands";
@@ -30,11 +31,20 @@ function App() {
       element: <Layout />,
       children: [
         {
-          path: "/",
+          path: "/product",
           element: (
             <ProtectedRoute>
               {" "}
               <Products />{" "}
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/",
+          element: (
+            <ProtectedRoute>
+              {" "}
+              <Home />{" "}
             </ProtectedRoute>
           ),
         },

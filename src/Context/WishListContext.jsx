@@ -93,16 +93,17 @@ const WishListContextProvider = ({ children }) => {
 
   return (
     <wishListContext.Provider
-      value={{
-        addProductToWishList,
-        products,
-        numOfItems,
-        deleteItemFromWishList,
-        cartID,
-        setnumOfItems,
-        setproducts,
-      }}
-    >
+  value={{
+    addProductToWishList,
+    products,
+    numOfItems,
+    deleteItemFromWishList,
+    cartID,
+    setnumOfItems,
+    setproducts,
+    wishlist: products.data?.map((item) => item.id), // ✅ ده اللي هنبعته للمقارنة
+  }}
+>
       {children}
     </wishListContext.Provider>
   );

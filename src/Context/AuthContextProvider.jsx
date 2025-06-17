@@ -13,6 +13,7 @@ function AuthContextProvider({ children }) {
 
         if (localStorage.getItem("tkn") != null) {
 
+            // if local storage contain any thing (tkn) put it in setToken
             setToken(localStorage.getItem("tkn"))
         }
     }, [])

@@ -3,11 +3,15 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Modal from "./../Modal/Modal";
+import { motion } from "framer-motion";
+import { ImSpinner8 } from "react-icons/im";
 
 function Brands() {
   // modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+    
+  
 
   const openModal = (content) => {
     setModalContent(content);
@@ -20,7 +24,9 @@ function Brands() {
   };
 
   async function getBrands() {
-    const response = await axios.get("https://ecommerce.routemisr.com/api/v1/brands");
+    const response = await axios.get(
+      "https://ecommerce.routemisr.com/api/v1/brands"
+    );
     return response.data; // نرجع .data عشان يسهل استخدامها
   }
 
@@ -34,30 +40,36 @@ function Brands() {
   }, [data]);
 
   if (isLoading) {
+     return (
+       <div className="min-h-screen flex items-center justify-center bg-white">
+         <ImSpinner8 className="animate-spin text-4xl text-green-600" />
+       </div>
+     );
+   }
+ 
+  if (isError) {
     return (
-      <div className="h-screen bg-teal-500 flex flex-wrap justify-center items-center">
-        <Bars
-          height="80"
-          width="80"
-          color="#fff"
-          ariaLabel="bars-loading"
-          visible={true}
-        />
+      <div className="text-center text-red-600 mt-10">
+        Error: {error.message}
       </div>
     );
   }
 
-  if (isError) {
-    return <div className="text-center text-red-600 mt-10">Error: {error.message}</div>;
-  }
-
   return (
     <>
-      <section className="py-8">
+      <section className="py-8 bg-gray-50">
         <div className="w-full md:w-[100%] m-auto">
-          <h1 className="text-teal-600 font-semibold text-6xl text-center">
-            All Brands
-          </h1>
+          <div className="flex flex-wrap items-center justify-center mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <h1 className="font-bold text-center text-5xl tracking-wider text-green-600">
+                All Brands
+              </h1>
+            </motion.div>
+          </div>
           <div className="flex flex-wrap justify-center items-center gap-8 my-10">
             {data?.data?.length > 0 ? (
               data.data.map((item, idx) => (
@@ -68,7 +80,7 @@ function Brands() {
                     openModal(
                       <div className="flex flex-wrap justify-center items-center gap-6 ">
                         <div>
-                          <h2 className="text-teal-500 text-center text-4xl mt-2 ">
+                          <h2 className="text-green-500 text-center text-4xl mt-2 ">
                             {item.name}
                           </h2>
                           <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
@@ -80,7 +92,7 @@ function Brands() {
                           <img
                             src={item.image}
                             alt="img"
-                            className="w-[90%] mx-auto"
+                            className="w-full mx-auto"
                           />
                         </div>
                       </div>
@@ -89,14 +101,16 @@ function Brands() {
                 >
                   <div className="inner p-3">
                     <img src={item.image} alt="img" className="w-full" />
-                    <h2 className="text-teal-500 text-center text-2xl mt-3">
+                    <h2 className="text-green-500 text-center text-2xl mt-3">
                       {item.name}
                     </h2>
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500 text-xl">No brands found.</p>
+              <p className="text-center text-gray-500 text-xl">
+                No brands found.
+              </p>
             )}
           </div>
         </div>

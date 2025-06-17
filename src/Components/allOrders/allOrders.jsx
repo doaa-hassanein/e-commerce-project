@@ -2,6 +2,14 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { Bars } from "react-loader-spinner";
+import { motion } from "framer-motion";
+import {
+  FiCalendar,
+  FiCreditCard,
+  FiDollarSign,
+  FiPackage,
+} from "react-icons/fi";
+import { ImSpinner8 } from "react-icons/im";
 
 const AllOrders = () => {
   const [loading, setLoading] = useState(false);
@@ -35,83 +43,25 @@ const AllOrders = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="h-screen bg-teal-600 flex flex-wrap justify-center items-center">
-        <Bars
-          height="80"
-          width="80"
-          color="#fff"
-          ariaLabel="bars-loading"
-          visible={true}
-        />
-      </div>
-    );
-  }
+     return (
+       <div className="min-h-screen flex items-center justify-center bg-white">
+         <ImSpinner8 className="animate-spin text-4xl text-green-600" />
+       </div>
+     );
+   }
+ 
   return (
-    // <section className="py-10">
-    //   <div className="flex flex-wrap items-center justify-center mb-8">
-    //     <h1 className="font-bold text-center text-5xl tracking-wider text-emerald-600">
-    //       All Orders
-    //     </h1>
-    //   </div>
-    //   <div className="w-full md:w-[90%] mx-auto">
-    //     {allOrders?.map((order, idx) => (
-    //       <div key={idx} className="py-10 px-5 mb-5 bg-slate-100 rounded-lg shadow-lg ">
-    //         <div className="flex flex-wrap gap-4 border-b-2 border-b-slate-300 pb-4">
-    //           {order.cartItems?.map((cartItem, idx) => (
-    //             <div
-    //               key={idx}
-    //               className="w-full md:w-1/4 lg:w-1/5 p-3 bg-white rounded-lg shadow-md flex flex-col items-center"
-    //             >
-    //               <img
-    //                 src={cartItem.product.imageCover}
-    //                 alt={cartItem.product.title}
-    //                 className="w-full h-60 object-cover rounded-lg"
-    //               />
-    //               <div className="text-center mt-2">
-    //                 <h2 className="font-semibold text-lg">
-    //                   {cartItem.product.title.split(" ").slice(0, 2).join(" ")}
-    //                 </h2>
-    //                 <h3 className="text-gray-600 text-md mt-1">
-    //                   {cartItem.product.brand.name}
-    //                 </h3>
-    //                 <h4 className="text-emerald-700 text-lg font-semibold mt-2">
-    //                   {cartItem.price} EGP
-    //                 </h4>
-    //               </div>
-    //             </div>
-    //           ))}
-    //         </div>
-    //         <div className="mt-4">
-    //           <h2 className="text-2xl font-semibold">
-    //             Total Order Price:{" "}
-    //             <span className="text-emerald-700">
-    //               {order.totalOrderPrice} EGP
-    //             </span>
-    //           </h2>
-    //           <h2 className="text-2xl font-semibold mt-2">
-    //             Payment Method Type:{" "}
-    //             <span className="text-emerald-700">
-    //               {order.paymentMethodType}
-    //             </span>
-    //           </h2>
-    //           <h2 className="text-2xl font-semibold mt-2">
-    //             Last Update:{" "}
-    //             <span className="text-emerald-700">
-    //               {new Date(order.updatedAt).toLocaleDateString()}
-    //             </span>
-    //           </h2>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </section>
-
-    <section className="py-10 bg-gray-50">
+    <section className="py-8 bg-gray-50">
       <div className="flex flex-wrap items-center justify-center mb-8">
-        <h1 className="font-bold text-center text-5xl tracking-wider text-teal-600">
-          All Orders
-        </h1>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <h1 className="font-bold text-center text-5xl tracking-wider text-green-600">
+           Your Order History
+          </h1>
+        </motion.div>
       </div>
       <div className="w-full md:w-4/5 lg:w-3/4 mx-auto">
         {allOrders?.map((order, idx) => (
@@ -134,35 +84,107 @@ const AllOrders = () => {
                     {cartItem.product.title.split(" ").slice(0, 2).join(" ")}
                   </h2>
                   <h3 className="text-md text-gray-600 mt-1">
-                    {cartItem.product.brand}
+                    {cartItem.product.brand.name}
                   </h3>
-                  <h4 className="text-lg font-bold text-teal-600 mt-2">
+                  <h4 className="text-lg font-bold text-green-600 mt-2">
                     {cartItem.price} EGP
                   </h4>
                 </div>
               ))}
             </div>
-            <div className="mt-4">
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                Total Order Price:{" "}
-                <span className="text-teal-600">
-                  {order.totalOrderPrice} EGP
-                </span>
-              </h2>
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                Payment Method Type:{" "}
-                <span className="text-teal-600">{order.paymentMethodType}</span>
-              </h2>
-              <h2 className="text-xl font-semibold text-gray-700">
-                Last Update:{" "}
-                <span className="text-teal-600">
-                  {new Date(order.updatedAt).toLocaleDateString()}
-                </span>
-              </h2>
+
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="flex items-center">
+                  <div className="bg-green-50 p-3 rounded-full mr-4">
+                    <FiDollarSign className="text-green-600 text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-xl text-gray-500 font-medium">
+                      Total Amount
+                    </p>
+                    <p className="text-xl font-medium text-gray-800">
+                      {order.totalOrderPrice} EGP
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="bg-blue-50 p-3 rounded-full mr-4">
+                    <FiCreditCard className="text-blue-600 text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-xl text-gray-500 font-medium">
+                      Payment Method
+                    </p>
+                    <p className="text-xl font-medium text-gray-800 capitalize">
+                      {order.paymentMethodType}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="bg-purple-50 p-3 rounded-full mr-4">
+                    <FiCalendar className="text-purple-600 text-xl" />
+                  </div>
+                  <div>
+                    <p className="text-xl text-gray-500 font-medium">
+                      Last Updated
+                    </p>
+                    <p className="text-xl font-medium text-gray-800">
+                      {new Date(order.updatedAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+                </div>
+
+                <div className=" flex items-center ">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <div className="bg-amber-50 p-3 rounded-full mr-4">
+                        <FiPackage className="text-amber-600 text-2xl" />
+                      </div>
+                      <div>
+                        <p className="text-xl text-gray-500 font-medium">
+                          Order Status
+                        </p>
+                        <p className="text-xl font-medium text-gray-800">
+                          Delivered
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}
       </div>
+
+      {allOrders?.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center py-20"
+        >
+          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <FiPackage className="text-gray-400 text-3xl" />
+          </div>
+          <h2 className="text-2xl font-light text-gray-600 mb-4">
+            No orders found
+          </h2>
+          <p className="text-gray-500 max-w-md mx-auto mb-6">
+            You haven't placed any orders yet. Start shopping to see your order
+            history here.
+          </p>
+          <button className="px-8 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+            Shop Now
+          </button>
+        </motion.div>
+      )}
     </section>
   );
 };

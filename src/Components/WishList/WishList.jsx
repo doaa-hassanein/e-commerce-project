@@ -1,109 +1,119 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { cartContext } from "../../Context/CartContext";
-import { Link } from "react-router-dom";
 import { wishListContext } from "../../Context/WishListContext";
 import toast from "react-hot-toast";
-
-
+import { motion } from "framer-motion";
+import { ImSpinner8 } from "react-icons/im";
 
 const WishList = () => {
-  const { products, deleteItemFromWishList, setproducts } =
-    useContext(wishListContext);
-
-  console.log(products.data, "wish page");
-
+  const { products, deleteItemFromWishList, setproducts } = useContext(wishListContext);
   const { addProductToCart } = useContext(cartContext);
+  const [isLoading, setisLoading] = useState(false)
 
-  // function to call addProductToCart
   async function addProduct(id) {
-    const data = await addProductToCart(id);
-    console.log(data);
-
-    if (data) {
-      toast.success(data.message);
-    } else {
-      toast.error("error");
+    try {
+      const data = await addProductToCart(id);
+      if (data) {
+        toast.success(data.message);
+      } else {
+        toast.error("Error adding to cart");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
     }
   }
 
-  //   const handleDelete = async (id) => {
-  //     try {
-  //       const result = await deleteItemFromWishList(id);
-  //       if (result.success) {
+  async function handleDelete(id) {
+    try {
+      const result = await deleteItemFromWishList(id);
+      if (result?.status === "success") {
+        setproducts((prev) => ({
+          ...prev,
+          data: prev.data.filter((product) => product._id !== id),
+        }));
+        toast.success("Item removed successfully");
+      } else {
+        toast.error("Failed to remove item");
+      }
+    } catch (error) {
+      toast.error("An error occurred");
+    }
+  }
 
-  //         setproducts(products.filter((product) => product._id !== id));
-  //         toast.success("Item removed successfully");
-  //       } else {
-  //         toast.error("Failed to remove item");
-  //       }
-  //     } catch (error) {
-  //       toast.error("An error occurred");
-  //     }
-  //   };
+   if (isLoading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-white">
+          <ImSpinner8 className="animate-spin text-4xl text-green-600" />
+        </div>
+      );
+    }
 
   return (
-   
+    <section className="py-10 px-4 bg-gray-50 min-h-screen">
+  <motion.div
+    initial={{ opacity: 0, y: -30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="text-center mb-10"
+  >
+    <h1 className="text-4xl font-bold text-green-600">Your Wishlist</h1>
+    <p className="text-gray-500 mt-2">Items you've saved for later</p>
+  </motion.div>
 
-    <section className="py-8 ">
-      <div className="w-full md:w-[90%] mx-auto p-6 bg-white rounded-lg shadow-md">
-        {products.length !== 0 ? (
-          <>
-            <h1 className="text-4xl font-semibold text-center text-teal-700 mb-6">
-              My Wish List
-            </h1>
-            {products?.data.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col md:flex-row items-center border-b border-gray-300 py-4"
-              >
-                
-                <div className="w-full md:w-1/4 p-4 ">
-                  <img
-                    src={item.imageCover}
-                    className="w-full h-60 object-cover rounded-lg shadow-md"
-                    alt={item.title}
-                  />
-                   
-                </div>
-                <div className="w-full md:w-1/2 p-4 text-center md:text-left">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                    {item.title}
-                  </h2>
-                  <h3 className="text-lg font-semibold text-teal-600 mb-4">
-                    {item.price} EGP
-                  </h3>
-                  <div className="flex justify-center md:justify-start gap-4">
-                    <button
-                      onClick={() => deleteItemFromWishList(item._id)}
-                      className="flex items-center text-red-700 border border-red-700 bg-transparent font-medium rounded-lg text-lg px-4 py-2 hover:bg-red-50 transition-colors"
-                    >
-                      <i className="fa fa-trash me-2" aria-hidden="true"></i>
-                      Remove
-                    </button>
-                    <button
-                      onClick={() => addProduct(item._id)}
-                      className="flex items-center text-teal-600 border border-teal-600 bg-transparent font-medium rounded-lg text-lg px-4 py-2 hover:bg-teal-50 transition-colors"
-                    >
-                      <i
-                        className="fa fa-cart-plus me-2"
-                        aria-hidden="true"
-                      ></i>
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
+  <div className="container mx-auto">
+    {products?.data?.length ? (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {products.data.map((item, index) => (
+          <motion.div
+            key={index}
+            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
+              <img
+                src={item.imageCover}
+                alt={item.title}
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <div className="p-5 flex flex-col flex-grow gap-3">
+              <h2 className="text-md font-semibold text-gray-800 line-clamp-2">{item.title}</h2>
+              <p className="text-green-600 font-bold text-lg">{item.price} EGP</p>
+              <div className="mt-auto flex justify-between gap-2 pt-4">
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="w-1/2 bg-red-100 text-red-700 hover:bg-red-200 font-medium py-2 rounded-lg transition-colors"
+                >
+                  <i className="fa fa-trash mr-2"></i> Remove
+                </button>
+                <button
+                  onClick={() => addProduct(item._id)}
+                  className="w-1/2 bg-green-100 text-green-700 hover:bg-green-200 font-medium py-2 rounded-lg transition-colors"
+                >
+                  <i className="fa fa-cart-plus mr-2"></i> Add to Cart
+                </button>
               </div>
-            ))}
-          </>
-        ) : (
-          <div className="text-center py-6">
-            <h2 className="text-2xl font-semibold text-teal-600">
-              Your Wish List is Empty
-            </h2>
-          </div>
-        )}
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    ) : (
+      <motion.div
+        className="text-center py-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <h2 className="text-2xl font-semibold text-green-600">
+          Your Wishlist is Empty 💔
+        </h2>
+        <p className="text-gray-500 mt-2">Start adding products you love</p>
+      </motion.div>
+    )}
+  </div>
+</section>
+
   );
 };
 
