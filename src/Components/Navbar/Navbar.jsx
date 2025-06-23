@@ -166,37 +166,37 @@ function Navbar() {
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-500 hover:text-fuchsia-800 transition-colors duration-300 transform hover:scale-125"
+                className="text-pink-600 hover:brightness-75 transition-all duration-300 transform hover:scale-125"
               >
                 <i className="fa-brands fa-instagram fa-lg"></i>
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-blue-600 transition-colors duration-300 transform hover:scale-125"
+                className="text-blue-600 hover:brightness-75 transition-all duration-300 transform hover:scale-125"
               >
                 <i className="fa-brands fa-facebook-f fa-lg"></i>
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-gray-800 transition-colors duration-300 transform hover:scale-125"
+                className="text-black hover:brightness-75 transition-all duration-300 transform hover:scale-125"
               >
                 <i className="fa-brands fa-tiktok fa-lg"></i>
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-sky-500 transition-colors duration-300 transform hover:scale-125"
+                className="text-sky-500 hover:brightness-75 transition-all duration-300 transform hover:scale-125"
               >
                 <i className="fa-brands fa-twitter fa-lg"></i>
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-indigo-700 transition-colors duration-300 transform hover:scale-125"
+                className="text-indigo-700 hover:brightness-75 transition-all duration-300 transform hover:scale-125"
               >
                 <i className="fa-brands fa-linkedin fa-lg"></i>
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-red-600 transition-colors duration-300 transform hover:scale-125"
+                className="text-red-600 hover:brightness-75 transition-all duration-300 transform hover:scale-125"
               >
                 <i className="fa-brands fa-youtube fa-lg"></i>
               </a>
@@ -207,7 +207,7 @@ function Navbar() {
               {token ? (
                 <button
                   onClick={Logout}
-                  className="px-4 py-2 bg-red-100 text-red-700 rounded-lg font-semibold transition-all duration-300 hover:bg-red-600 hover:text-white hover:shadow-md"
+                  className="px-4 py-2 bg-red-700 text-white rounded-lg font-semibold transition-all duration-300 hover:bg-red-800 hover:text-white hover:shadow-md"
                 >
                   Logout
                 </button>
