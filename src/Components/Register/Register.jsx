@@ -68,16 +68,13 @@ function Register() {
       <img
         src={background}
         alt="Background"
-        className="absolute inset-0 object-cover w-full h-[110%] -z-10"
+        className="absolute inset-0 object-cover w-full h-[100%] -z-10"
       />
 
       <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50 px-2 md:px-4">
-
-      <div className="mx-auto w-[90%] bg-opacity-50 rounded-lg flex flex-col lg:flex-row overflow-hidden">
-
+        <div className="mx-auto w-[90%] bg-opacity-50 rounded-lg flex flex-col lg:flex-row overflow-hidden">
           <div className="bg-opacity-85 p-6 md:p-8 rounded-lg shadow-lg w-full lg:w-[600px] mx-auto">
-
-            <h1 className="text-5xl font-semibold text-white text-center mb-6 ">
+            <h1 className="text-4xl font-semibold text-white text-center mb-6 ">
               Registration Form
             </h1>
 
@@ -85,7 +82,7 @@ function Register() {
               <div className="relative z-0 w-full mb-5 group">
                 <label
                   htmlFor="name"
-                  className="block text-xl font-medium text-white"
+                  className="block text-base font-medium text-white"
                 >
                   Full Name
                 </label>
@@ -93,13 +90,12 @@ function Register() {
                   type="text"
                   name="name"
                   id="name"
-                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                  className="mt-1 block w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                   placeholder=" "
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                
               </div>
               {formik.errors.name && formik.touched.name && (
                 <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
@@ -109,9 +105,9 @@ function Register() {
               )}
 
               <div className="relative z-0 w-full mb-5 group">
-                 <label
+                <label
                   htmlFor="email"
-                 className="block text-xl font-medium text-white"
+                  className="block text-base font-medium text-white"
                 >
                   Email Address
                 </label>
@@ -119,13 +115,12 @@ function Register() {
                   type="email"
                   name="email"
                   id="email"
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                  className="mt-1 block w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                   placeholder=" "
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-               
               </div>
               {formik.errors.email && formik.touched.email && (
                 <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
@@ -135,27 +130,27 @@ function Register() {
               )}
 
               <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-xl font-medium text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.errors.password && formik.touched.password && (
-                    <p className="text-sm text-red-600 mt-1">
-                      {formik.errors.password}
-                    </p>
-                  )}
-                </div>
+                <label
+                  htmlFor="password"
+                  className="block text-base font-medium text-white"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="mt-1 block w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.errors.password && formik.touched.password && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {formik.errors.password}
+                  </p>
+                )}
+              </div>
               {formik.errors.password && formik.touched.password && (
                 <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
                   <span className="font-medium">Error!</span>{" "}
@@ -166,7 +161,7 @@ function Register() {
               <div className="relative z-0 w-full mb-5 group">
                 <label
                   htmlFor="rePassword"
-                  className="block text-xl font-medium text-white"
+                  className="block text-base font-medium text-white"
                 >
                   Repassword
                 </label>
@@ -174,13 +169,12 @@ function Register() {
                   type="password"
                   name="rePassword"
                   id="rePassword"
-                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                  className="mt-1 block w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                   placeholder=" "
                   value={formik.values.rePassword}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                
               </div>
               {formik.errors.rePassword && formik.touched.rePassword && (
                 <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
@@ -192,7 +186,7 @@ function Register() {
               <div className="relative z-0 w-full mb-5 group">
                 <label
                   htmlFor="phone"
-                 className="block text-xl font-medium text-white"
+                  className="block text-base font-medium text-white"
                 >
                   Phone Number
                 </label>
@@ -200,13 +194,12 @@ function Register() {
                   type="tel"
                   name="phone"
                   id="phone"
-                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
+                  className="mt-1 block w-full px-4 py-1 border border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 text-gray-900"
                   placeholder=" "
                   value={formik.values.phone}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                
               </div>
               {formik.errors.phone && formik.touched.phone && (
                 <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
@@ -218,9 +211,8 @@ function Register() {
               <div className="text-right">
                 <button
                   type="submit"
-                  className="w-full text-xl font-medium py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition"
+                  className="w-full text-base font-medium py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition"
                 >
-                
                   {isLoading ? (
                     <i className="fa-solid fa-spinner fa-spin text-white"></i>
                   ) : (
@@ -232,10 +224,10 @@ function Register() {
           </div>
 
           <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-white p-6 md:p-12 mt-10 lg:mt-0">
-
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 lg:mb-10">Welcome Back</h1>
-           <p className="text-base md:text-lg lg:text-xl text-white mb-6 leading-relaxed text-left">
-
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 lg:mb-10">
+              Welcome Back
+            </h1>
+            <p className="text-sm md:text-base lg:text-base text-white mb-6 leading-relaxed text-left">
               It's a long established fact that a reader will be distracted
               <br />
               by the readable content of a page when looking at its layout.

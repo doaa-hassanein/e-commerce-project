@@ -6,7 +6,7 @@ function NotFoundPage() {
 
     return (
         <>
-            <Navbar />
+          
             <div className="p-8">
                 <div className="w-[60%] mx-auto">
 
@@ -15,7 +15,7 @@ function NotFoundPage() {
 
             </div>
 
-            <Footer />
+          
         </>
     )
 }

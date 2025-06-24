@@ -165,18 +165,18 @@ function Login() {
       <img
         src={background}
         alt="Background"
-        className="absolute inset-0 object-cover w-full h-[110%] -z-10"
+        className="absolute inset-0 object-cover w-full h-[100%] -z-10"
       />
 
       <div className="min-h-screen flex items-center justify-center bg-gray-900 bg-opacity-50 px-4">
 
-        <div className="mx-auto w-[95%] bg-opacity-50 rounded-lg flex flex-col md:flex-row overflow-hidden">
+        <div className="mx-auto w-[80%] bg-opacity-50 rounded-lg flex flex-col md:flex-row overflow-hidden">
 
 
           <div className="w-full md:w-1/2 flex flex-col justify-center items-start text-white p-6 md:p-12 mb-8 md:mb-[100px]">
 
-            <h1 className="text-5xl font-bold mb-10">Welcome Back</h1>
-            <p className="text-xl text-white mb-6 leading-relaxed text-left ">
+            <h1 className="text-4xl font-bold mb-10">Welcome Back</h1>
+            <p className="text-base text-white mb-6 leading-relaxed text-left ">
               It's a long established fact that a reader will be distracted
               <br />
               by the readable content of a page when looking at its layout.
@@ -196,7 +196,7 @@ function Login() {
           <div className="w-full md:w-1/2 flex items-center justify-center bg-opacity-60 p-6 md:p-12">
 
             <div className="w-full max-w-md">
-              <h2 className="text-5xl font-bold mb-6 text-white text-center">
+              <h2 className="text-4xl font-bold mb-6 text-white text-center">
                 Sign in
               </h2>
 
@@ -205,7 +205,7 @@ function Login() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-xl font-medium text-white"
+                    className="block text-base font-medium text-white"
                   >
                     Email Address
                   </label>
@@ -229,7 +229,7 @@ function Login() {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-xl font-medium text-white"
+                    className="block text-base font-medium text-white"
                   >
                     Password
                   </label>
@@ -251,14 +251,14 @@ function Login() {
 
                 {/* Remember me + Forgot Password */}
                 <div className="flex items-center justify-between">
-                  <label className="flex items-center text-lg font-medium text-gray-300">
+                  <label className="flex items-center text-base font-medium text-gray-300">
                     <input type="checkbox" className="mr-2" />
                     Remember me
                   </label>
                   <button
                     type="button"
                     onClick={() => setIsForgotPassword(true)}
-                    className="text-lg font-medium text-white hover:underline"
+                    className="text-base font-medium text-white hover:underline"
                   >
                     Forget password?
                   </button>
@@ -267,7 +267,7 @@ function Login() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full text-xl font-medium py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition"
+                  className="w-full text-lg font-medium py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition"
                 >
                   {isLoading ? (
                     <i className="fa-solid fa-spinner fa-spin text-white"></i>
@@ -278,7 +278,7 @@ function Login() {
               </form>
 
               {/* Terms */}
-              <p className="text-sm text-center text-white mt-6">
+              <p className="text-xs text-center text-white mt-6">
                 By clicking on "Sign in now" you agree to our{" "} <br/>
                 <a href="#" className="text-white hover:underline">
                   Terms of Service

@@ -3,76 +3,113 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 py-8">
-      <div className="mx-auto max-w-screen-xl px-4">
-        {/* App Promotion Section */}
-        <div className="text-center mb-8">
-          <span className="text-3xl font-semibold text-green-600">
-            Get the FrshCart App
-          </span>
-          <p className="text-lg text-gray-600 mt-2">
-            We will send you a link; open it on your phone to download the app.
-          </p>
+    <footer className="bg-gray-50 text-gray-800 py-6 border-t border-gray-200">
+      <div className="mx-auto max-w-screen-xl px-6">
+        {/* Newsletter - Modern */}
+        <div className="mb-7">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Stay Updated
+            </h3>
+            <p className="text-gray-600 mb-6 text-base">
+              Subscribe to our newsletter for the latest offers and updates
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                className="flex-grow px-5 py-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-800 placeholder-gray-500 shadow-sm"
+                placeholder="Your email address"
+              />
+              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Email Subscription and Button */}
-        <div className="flex flex-col items-center md:flex-row md:justify-center md:space-x-4">
-          <input
-            type="text"
-            className="w-full md:w-2/3 lg:w-1/3 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Enter your email..."
-          />
-          <button className="mt-4 md:mt-0 bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 focus:ring-4 focus:ring-green-300 text-lg">
-            Share App Link
-          </button>
-        </div>
-
-        {/* Payment Methods Section */}
-        <div className="mt-8 border-t border-b border-gray-300 py-6">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+        {/* Payment & Social - Enhanced */}
+        <div className="border-t border-gray-300 pt-5">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             {/* Payment Methods */}
-            <div className="flex flex-col md:flex-row md:items-center mb-8 md:mb-0">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 md:mb-0 md:mr-4 flex items-center">
-                <span className="mr-2">Payment Methods</span>
-                <div className="flex space-x-4">
-                  <i className="fa-brands fa-amazon-pay text-3xl text-yellow-400 hover:text-yellow-500 transition-colors"></i>
-                  <svg
-                  className="mt-[-9px]"
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="50"
-                  height="50"
-                  viewBox="0 0 48 48"
-                >
-                  <path
-                    fill="#3F51B5"
-                    d="M45,35c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V13c0-2.209,1.791-4,4-4h34c2.209,0,4,1.791,4,4V35z"
-                  ></path>
-                  <path
-                    fill="#FFC107"
-                    d="M30 14A10 10 0 1 0 30 34A10 10 0 1 0 30 14Z"
-                  ></path>
-                  <path
-                    fill="#FF3D00"
-                    d="M22.014,30c-0.464-0.617-0.863-1.284-1.176-2h5.325c0.278-0.636,0.496-1.304,0.637-2h-6.598C20.07,25.354,20,24.686,20,24h7c0-0.686-0.07-1.354-0.201-2h-6.598c0.142-0.696,0.359-1.364,0.637-2h5.325c-0.313-0.716-0.711-1.383-1.176-2h-2.973c0.437-0.58,0.93-1.122,1.481-1.595C21.747,14.909,19.481,14,17,14c-5.523,0-10,4.477-10,10s4.477,10,10,10c3.269,0,6.162-1.575,7.986-4H22.014z"
-                  ></path>
-                </svg>
-                  <i className="fa-brands fa-cc-paypal text-3xl text-sky-400 hover:text-sky-600 transition-colors"></i>
-                  <i className="fa-brands fa-cc-visa text-3xl text-blue-600 hover:text-blue-700 transition-colors"></i>
-                </div>
-              </h2>
+            <div className="text-center md:text-left">
+              <h4 className="text-lg font-semibold mb-3 text-gray-900">
+                We Accept
+              </h4>
+              <div className="flex justify-center md:justify-start gap-3">
+                {[
+                  { icon: "fa-cc-visa", color: "text-blue-900" },
+                  { icon: "fa-cc-mastercard", color: "text-red-600" },
+                  { icon: "fa-cc-paypal", color: "text-blue-500" },
+                  { icon: "fa-cc-apple-pay", color: "text-black" },
+                  { icon: "fa-cc-amazon-pay", color: "text-amber-600" },
+                ].map((method, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-2 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-all"
+                  >
+                    <i
+                      className={`fa-brands ${method.icon} text-2xl ${method.color}`}
+                    ></i>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Delivery Info */}
-            <div className="flex flex-col md:flex-row md:items-center">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 md:mb-0 md:mr-4 flex items-center">
-                <span className="mr-2">Get Deliveries with FrshCart</span>
-                <div className="flex space-x-4">
-                  <i className="fa-brands fa-cc-apple-pay text-2xl text-gray-500 hover:text-gray-600 transition-colors"></i>
-                  <i className="fa-brands fa-google-play text-2xl text-orange-500 hover:text-orange-600 transition-colors"></i>
-                </div>
-              </h2>
+            {/* Social Links */}
+            <div className="text-center md:text-left">
+              <h4 className="text-lg font-semibold mb-3 text-gray-900">
+                Connect With Us
+              </h4>
+              <div className="flex justify-center md:justify-start gap-3">
+                {[
+                  {
+                    icon: "fa-facebook-f",
+                    color: "bg-blue-600 hover:bg-blue-700",
+                  },
+                  { icon: "fa-twitter", color: "bg-sky-500 hover:bg-sky-600" },
+                  {
+                    icon: "fa-instagram",
+                    color: "bg-pink-600 hover:bg-pink-700",
+                  },
+                  {
+                    icon: "fa-linkedin-in",
+                    color: "bg-blue-700 hover:bg-blue-800",
+                  },
+                  { icon: "fa-youtube", color: "bg-red-600 hover:bg-red-700" },
+                ].map((social, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className={`${social.color} w-12 h-12 flex items-center justify-center rounded-full text-white transition-all duration-300 shadow hover:shadow-lg`}
+                  >
+                    <i className={`fa-brands ${social.icon} text-lg`}></i>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright - Enhanced */}
+          <div className="mt-5 pt-8 border-t border-gray-300 text-center">
+            <p className="text-gray-600 text-sm">
+              © {new Date().getFullYear()} FreshCart. All rights reserved.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-4">
+              {[
+                "Privacy Policy",
+                "Terms of Service",
+                "Shipping Policy",
+                "Returns",
+                "Contact Us",
+              ].map((item, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="text-gray-600 hover:text-green-600 text-sm font-medium transition-colors duration-300"
+                >
+                  {item}
+                </a>
+              ))}
             </div>
           </div>
         </div>

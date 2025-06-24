@@ -83,77 +83,78 @@ function Categories() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
-      <div className="container mx-auto px-4">
-       <div className="flex flex-wrap items-center justify-center mb-8">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-16"
-            >
-              <h1 className="font-bold text-center text-5xl tracking-wider text-green-600">
-                  Browse Our Collections
-              </h1>
-            </motion.div>
+   <div className="bg-gray-50 min-h-screen py-10">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-wrap items-center justify-center mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-10"
+      >
+        <h1 className="font-bold text-center text-3xl tracking-wide text-green-600">
+          Browse Our Collections
+        </h1>
+      </motion.div>
+    </div>
+
+    {/* Categories Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {categoriesData?.map((category) => (
+        <div key={category._id} className="relative group">
+          {/* Category Card */}
+          <div
+            className="bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer"
+            onClick={() => toggleCategory(category._id)}
+          >
+            <div className="relative h-52 overflow-hidden">
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                <h2 className="text-lg font-medium text-white">
+                  {category.name}
+                </h2>
+              </div>
+            </div>
           </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categoriesData?.map((category) => (
-            <div key={category._id} className="relative group">
-              {/* Category Card */}
-              <div
-                className="bg-white rounded-xl shadow-sm overflow-hidden cursor-pointer"
-                onClick={() => toggleCategory(category._id)}
+          {/* Subcategories Slide-out Panel */}
+          <AnimatePresence>
+            {expandedCategories.has(category._id) && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-2 gap-2 p-4 bg-gray-50 rounded-b-xl"
               >
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                    <h2 className="text-2xl font-medium text-white">
-                      {category.name}
-                    </h2>
-                  </div>
-                </div>
-              </div>
-
-              {/* Subcategories Slide-out Panel */}
-              <AnimatePresence>
-                {expandedCategories.has(category._id) && (
+                {subcategories.map((sub) => (
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="grid grid-cols-2 gap-3 p-6 bg-gray-50 rounded-b-xl "
+                    key={sub._id}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    {subcategories.map((sub) => (
-                      <motion.div
-                        key={sub._id}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Link
-                          to={`/products?subcategory=${sub._id}`}
-                          className="block px-4 py-4 bg-white rounded-lg shadow-xs hover:shadow-sm transition-all text-center hover:bg-green-50  border-2 border-green-600 "
-                        >
-                          <span className="text-lg font-medium text-gray-800 hover:text-green-600 ">
-                            {sub.name}
-                          </span>
-                        </Link>
-                      </motion.div>
-                    ))}
+                    <Link
+                      to={`/products?subcategory=${sub._id}`}
+                      className="block px-3 py-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-all text-center hover:bg-green-50 border-2 border-green-600"
+                    >
+                      <span className="text-base font-medium text-gray-800 hover:text-green-600">
+                        {sub.name}
+                      </span>
+                    </Link>
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </div>
+      ))}
     </div>
+  </div>
+</div>
+
   );
 }
 

@@ -71,21 +71,22 @@ function Products() {
   }
 
   return (
-    <section className="py-10 px-4 bg-gray-50 min-h-screen">
-      <div className="w-[80%] mx-auto">
-        <div className="mb-16">
+    <section className="py-10 bg-gray-50 min-h-screen">
+      <div className="w-[85%] mx-auto">
+        <div className="mb-12">
+          
           {filteredProducts?.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
+              <p className="text-gray-500 text-base">
                 No products found matching your search.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {filteredProducts?.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
+                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full"
                 >
                   <Link
                     to={`/productDetails/${item.id}`}
@@ -99,37 +100,39 @@ function Products() {
                       />
                     </div>
                     <div
-                      className="p-5 flex flex-col"
-                      style={{ minHeight: "180px" }}
+                      className="p-3 flex flex-col"
+                      style={{ minHeight: "150px" }}
                     >
-                      <span className="text-xs font-semibold text-green-600 uppercase tracking-wider">
+                      <span className="text-sm font-bold text-green-600 uppercase tracking-wider">
                         {item.category.name}
                       </span>
-                      <h3 className="mt-2 text-lg font-medium text-gray-900 line-clamp-2 flex-grow">
-                        {item.title}
+                      <h3 className="mt-2 text-sm font-medium text-gray-900 line-clamp-2 flex-grow">
+                        {item.category.name.split(" ").slice(0, 2).join(" ")}
                       </h3>
+
                       <div className="mt-auto pt-3 flex justify-between items-center">
-                        <span className="text-gray-900 font-bold text-lg">
+                        <span className="text-gray-900 font-semibold text-sm">
                           {item.price} EGP
                         </span>
-                        <div className="flex items-center bg-gray-100 px-2 py-1 rounded">
+                        <div className="flex items-center bg-gray-100 px-2 py-1 rounded ">
                           <BsStarFill className="text-yellow-400 mr-1" />
-                          <span className="text-gray-600">
+                          <span className="text-gray-600 text-sm font-semibold">
                             {item.ratingsAverage}
                           </span>
                         </div>
                       </div>
                     </div>
                   </Link>
-                  <div className="px-5 pb-5 mt-auto">
+                  <div className="px-5 pb-4 mt-auto">
                     <div className="flex justify-between items-center">
                       <button
                         onClick={() => addProduct(item.id)}
-                        className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 mr-3"
+                        className="flex-1 flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 mr-3 text-sm sm:text-base"
                       >
                         <BsCartPlus className="mr-2" />
                         Add to Cart
                       </button>
+
                       <button
                         onClick={() => addToWishList(item.id)}
                         className="p-3 rounded-full hover:bg-gray-100 transition-colors duration-200"

@@ -100,7 +100,7 @@ const Payment = () => {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-16 px-4"
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4"
     >
       {/* Header */}
       <div className="text-center mb-12">
@@ -108,7 +108,7 @@ const Payment = () => {
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="text-4xl font-medium text-gray-800 mb-4"
+          className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4"
         >
           Complete Your Purchase
         </motion.h2>
@@ -119,8 +119,8 @@ const Payment = () => {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="w-[60%] mx-auto bg-white rounded-xl shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-lg"
-      >
+        className="w-full sm:w-[90%] md:w-[80%] lg:w-[60%] mx-auto bg-white rounded-xl shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+>
         <div className="p-8">
           <h3 className="text-2xl font-medium text-gray-800 mb-6">
             Shipping Information

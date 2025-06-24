@@ -57,66 +57,71 @@ function Brands() {
 
   return (
     <>
-      <section className="py-8 bg-gray-50">
-        <div className="w-full md:w-[100%] m-auto">
-          <div className="flex flex-wrap items-center justify-center mb-8">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-16"
-            >
-              <h1 className="font-bold text-center text-5xl tracking-wider text-green-600">
-                All Brands
-              </h1>
-            </motion.div>
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-8 my-10">
-            {data?.data?.length > 0 ? (
-              data.data.map((item, idx) => (
-                <div
-                  className="sm:w-1/2 md:w-1/3 lg:w-1/5 p-4 product-card border border-gray-300 rounded-md cursor-pointer"
-                  key={idx}
-                  onClick={() =>
-                    openModal(
-                      <div className="flex flex-wrap justify-center items-center gap-6 ">
-                        <div>
-                          <h2 className="text-green-500 text-center text-4xl mt-2 ">
-                            {item.name}
-                          </h2>
-                          <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            {item.name}
-                          </p>
-                        </div>
+      <section className="py-6 bg-gray-50">
+  <div className="w-full md:w-full mx-auto">
+    <div className="flex flex-wrap items-center justify-center mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-10"
+      >
+        <h1 className="font-bold text-center text-3xl tracking-wide text-green-600">
+          All Brands
+        </h1>
+      </motion.div>
+    </div>
 
-                        <div>
-                          <img
-                            src={item.image}
-                            alt="img"
-                            className="w-full mx-auto"
-                          />
-                        </div>
-                      </div>
-                    )
-                  }
-                >
-                  <div className="inner p-3">
-                    <img src={item.image} alt="img" className="w-full" />
-                    <h2 className="text-green-500 text-center text-2xl mt-3">
+    <div className="flex flex-wrap justify-center items-center gap-6 my-6">
+      {data?.data?.length > 0 ? (
+        data.data.map((item, idx) => (
+          <div
+            className="sm:w-1/2 md:w-1/3 lg:w-1/5 p-3 product-card border border-gray-300 rounded-md cursor-pointer"
+            key={idx}
+            onClick={() =>
+              openModal(
+                <div className="flex flex-wrap justify-center items-center gap-4">
+                  <div>
+                    <h2 className="text-green-500 text-center text-2xl mt-2">
                       {item.name}
                     </h2>
+                    <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                      {item.name}
+                    </p>
+                  </div>
+                  <div>
+                    <img
+                      src={item.image}
+                      alt="img"
+                      className="w-full max-w-[180px] mx-auto"
+                    />
                   </div>
                 </div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500 text-xl">
-                No brands found.
-              </p>
-            )}
+              )
+            }
+          >
+            <div className="inner p-2">
+              <img
+                src={item.image}
+                alt="img"
+                className="w-full max-h-32 object-contain"
+              />
+              <h2 className="text-green-500 text-center text-lg mt-2">
+                {item.name}
+              </h2>
+            </div>
           </div>
-        </div>
-      </section>
+        ))
+      ) : (
+        <p className="text-center text-gray-500 text-base">
+          No brands found.
+        </p>
+      )}
+    </div>
+  </div>
+</section>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+<Modal isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+
     </>
   );
 }

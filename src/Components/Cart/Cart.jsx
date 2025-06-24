@@ -147,7 +147,7 @@ const Cart = () => {
                 {/* Cart Header */}
                 <div className="bg-white p-6 border-b border-gray-200">
                   <div className="flex justify-between items-center">
-                    <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-3">
+                    <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
                       <i className="fa-solid fa-cart-shopping text-green-500"></i>
                       Your Shopping Bag
                     </h1>
@@ -184,11 +184,11 @@ const Cart = () => {
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-between items-start gap-4">
                           <div>
-                            <h3 className="text-lg font-semibold text-gray-800">
+                            <h3 className="text-base font-semibold text-gray-800">
                               {item.product.title}
                             </h3>
                           </div>
-                          <p className="text-lg font-bold text-green-600 whitespace-nowrap">
+                          <p className="text-base font-bold text-green-600 whitespace-nowrap">
                             {item.price} EGP
                           </p>
                         </div>
@@ -238,7 +238,7 @@ const Cart = () => {
 
                   <button
                     onClick={clearCart}
-                    className="px-6 py-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2 text-xl font-medium"
+                    className="px-6 py-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2 text-lg font-medium"
                   >
                     <i className="fa-solid fa-trash-can"></i>
                     Clear Cart
@@ -250,7 +250,7 @@ const Cart = () => {
             {/* Order Summary */}
             <div className="lg:w-1/3">
               <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
-                <h2 className="text-xl font-bold text-gray-800 mb-6 pb-4 border-b border-gray-200">
+                <h2 className="text-lg font-bold text-gray-800 mb-6 pb-4 border-b border-gray-200">
                   Order Summary
                 </h2>
 
@@ -271,7 +271,7 @@ const Cart = () => {
 
                 <div className="flex justify-between items-center mb-8 pt-4 border-t border-gray-200">
                   <span className="text-lg font-semibold">Total</span>
-                  <span className="text-2xl font-bold text-green-600">
+                  <span className="text-xl font-bold text-green-600">
                     {totalPrice} EGP
                   </span>
                 </div>
