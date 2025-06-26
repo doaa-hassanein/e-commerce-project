@@ -1,5 +1,5 @@
 import Slider from "react-slick";
-import "./style.css";
+import "./style2.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import slider1 from "./../../assets/images/6.webp";
@@ -7,6 +7,7 @@ import slider2 from "./../../assets/images/aavif.avif";
 import slider3 from "./../../assets/images/slider 1.webp";
 import slider4 from "./../../assets/images/9.avif";
 import slider5 from "./../../assets/images/makeup-brush-set.jpg";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function HomeSlider() {
   const settings = {
@@ -103,25 +104,20 @@ export default function HomeSlider() {
   );
 }
 
-// Custom Arrow Components
-const NextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} next-arrow`}
-      style={{ ...style, display: "block", right: "20px", zIndex: 1 }}
-      onClick={onClick}
-    />
-  );
-};
+const PrevArrow = ({ onClick }) => (
+  <div
+    className="custom-icon-arrow left-3"
+    onClick={onClick}
+  >
+    <FaChevronLeft />
+  </div>
+);
 
-const PrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} prev-arrow`}
-      style={{ ...style, display: "block", left: "20px", zIndex: 1 }}
-      onClick={onClick}
-    />
-  );
-};
+const NextArrow = ({ onClick }) => (
+  <div
+    className="custom-icon-arrow right-3"
+    onClick={onClick}
+  >
+    <FaChevronRight />
+  </div>
+);
