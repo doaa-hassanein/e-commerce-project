@@ -46,75 +46,77 @@ const ProductDetails = () => {
 
  return (
   <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <section className="w-[60%] mx-auto">
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
-        {/* Image Section */}
-        <div className="w-full lg:w-1/2 p-6 flex items-center justify-center ">
-          <img
-            src={data?.data.data.imageCover}
-            className="w-full h-auto max-h-[500px] object-contain rounded-lg"
-            alt={data?.data.data.title}
-          />
-        </div>
+  <section className="w-full max-w-6xl mx-auto">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
+      
+      {/* Image Section */}
+      <div className="w-full lg:w-1/2 p-4 flex items-center justify-center">
+        <img
+          src={data?.data.data.imageCover}
+          className="w-full h-auto max-h-[300px] sm:max-h-[400px] lg:max-h-[500px] object-contain rounded-lg"
+          alt={data?.data.data.title}
+        />
+      </div>
 
-        {/* Content Section */}
-        <div className="w-full lg:w-1/2 p-8 flex flex-col">
-          <div className="flex-grow">
-            <span className="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded-full mb-4">
-              {data?.data.data.category.name}
-            </span>
-            
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              {data?.data.data.title}
-            </h1>
-            
-            <div className="flex items-center mb-6">
-              <div className="flex items-center mr-6">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <i 
-                      key={i}
-                      className={`fas fa-star ${i < Math.floor(data?.data.data.ratingsAverage) ? 'text-yellow-400' : 'text-gray-300'}`}
-                    />
-                  ))}
-                </div>
-                <span className="ml-2 text-gray-600">
-                  {data?.data.data.ratingsAverage.toFixed(1)}
-                </span>
+      {/* Content Section */}
+      <div className="w-full lg:w-1/2 p-6 sm:p-8 flex flex-col">
+        <div className="flex-grow">
+          <span className="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded-full mb-4">
+            {data?.data.data.category.name}
+          </span>
+
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            {data?.data.data.title}
+          </h1>
+
+          <div className="flex flex-col sm:flex-row sm:items-center mb-6 gap-2 sm:gap-4">
+            <div className="flex items-center">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <i
+                    key={i}
+                    className={`fas fa-star ${i < Math.floor(data?.data.data.ratingsAverage) ? 'text-yellow-400' : 'text-gray-300'}`}
+                  />
+                ))}
               </div>
-              <span className="text-2xl font-bold text-gray-900">
-                {data?.data.data.price} EGP
+              <span className="ml-2 text-gray-600">
+                {data?.data.data.ratingsAverage.toFixed(1)}
               </span>
             </div>
-            
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              {data?.data.data.description}
-            </p>
+            <span className="text-xl sm:text-2xl font-bold text-gray-900">
+              {data?.data.data.price} EGP
+            </span>
           </div>
 
-          <button
-            onClick={addProduct}
-            disabled={loader}
-            className={`w-full py-4 px-6 rounded-lg font-medium text-white transition-all duration-300 ${
-              loader ? 'bg-green-600' : 'bg-green-700 hover:bg-green-800'
-            } flex items-center justify-center space-x-2`}
-          >
-            {loader ? (
-              <>
-                <i className="fas fa-spinner fa-spin"></i>
-                <span>Adding...</span>
-              </>
-            ) : (
-              <>
-                <i className="fas fa-shopping-cart mr-2"></i>
-                <span>Add to Cart</span>
-              </>
-            )}
-          </button>
+          <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed">
+            {data?.data.data.description}
+          </p>
         </div>
+
+        <button
+          onClick={addProduct}
+          disabled={loader}
+          className={`w-full py-3 sm:py-4 px-6 rounded-lg font-medium text-white transition-all duration-300 ${
+            loader ? 'bg-green-600' : 'bg-green-700 hover:bg-green-800'
+          } flex items-center justify-center space-x-2`}
+        >
+          {loader ? (
+            <>
+              <i className="fas fa-spinner fa-spin"></i>
+              <span>Adding...</span>
+            </>
+          ) : (
+            <>
+              <i className="fas fa-shopping-cart mr-2"></i>
+              <span>Add to Cart</span>
+            </>
+          )}
+        </button>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
+
 );
 };
 
